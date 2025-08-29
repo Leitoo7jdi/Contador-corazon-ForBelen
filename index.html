@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Días que no nos vimos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body {
+    margin: 0;
+    background: #111;
+    color: #eee;
+    font-family: "Arial", sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+  }
+
+  .corazon {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    background: url('corazon.png') no-repeat center/contain;
+  }
+
+  #contador {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff4444;
+    text-shadow: 0 0 12px rgba(255,0,0,0.8);
+  }
+
+  .fecha {
+    margin-top: 25px;
+    font-size: 1rem;
+    color: #aaa;
+  }
+</style>
+</head>
+<body>
+  <div class="corazon">
+    <div id="contador">—</div>
+  </div>
+  <p class="fecha">La última vez fue el 21 de agosto de 2025</p>
+
+  <script>
+    const ultimaFecha = new Date(2025, 7, 21); // mes 7 = agosto
+    function actualizar() {
+      const hoy = new Date();
+      const inicio = new Date(ultimaFecha.getFullYear(), ultimaFecha.getMonth(), ultimaFecha.getDate());
+      const actual = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+      const dias = Math.floor((actual - inicio) / 86400000);
+      document.getElementById("contador").textContent = dias + (dias === 1 ? " día sin ti 💔" : " días sin ti 💔");
+    }
+    actualizar();
+    setInterval(actualizar, 1000 * 60 * 60);
+  </script>
+</body>
+</html>
