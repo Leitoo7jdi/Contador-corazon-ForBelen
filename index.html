@@ -1,66 +1,146 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Días que no nos vimos</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  body {
-    margin: 0;
-    background: #111;
-    color: #eee;
-    font-family: "Arial", sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    text-align: center;
-  }
-
-  .corazon {
-    position: relative;
-    display: inline-block;
-    width: 200px;
-    height: 200px;
-    background: url('corazon.png') no-repeat center/contain;
-  }
-
-  #contador {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #ff4444;
-    text-shadow: 0 0 12px rgba(255,0,0,0.8);
-  }
-
-  .fecha {
-    margin-top: 25px;
-    font-size: 1rem;
-    color: #aaa;
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>Días que no nos vimos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      color: #eee;
+      font-family: "Arial", sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+    h1 {
+      font-size: 1.8rem;
+      color: #ffb6c1; /* rosa pastel suave */
+      text-shadow: 0 0 10px rgba(255,182,193,0.8);
+      margin-bottom: 20px;
+    }
+    .corazon {
+      position: relative;
+      display: inline-block;
+      width: 200px;
+      height: 200px;
+      background: url('corazon.png') no-repeat center/contain;
+      margin-bottom: 20px;
+    }
+    #contador {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #ff4444;
+      text-shadow: 0 0 12px rgba(255,0,0,0.8);
+    }
+    #contadorExacto {
+      margin-top: 15px;
+      font-size: 1rem;
+      color: #ff6666;
+      text-shadow: 0 0 8px rgba(255,0,0,0.6);
+    }
+    .fecha {
+      margin-top: 25px;
+      font-size: 1rem;
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ffb6c1;
+      border: none;
+      border-radius: 5px;
+      color: #111;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 8px rgba(255,182,193,0.6);
+    }
+    button:hover {
+      background: #ffa6b6;
+    }
+    .video-container {
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+  </style>
 </head>
 <body>
+  <h1>For Lucia Belen Soria</h1>
+
   <div class="corazon">
     <div id="contador">—</div>
   </div>
-  <p class="fecha">La última vez fue el 21 de agosto de 2025</p>
+  <div id="contadorExacto">—</div>
+  <p class="fecha">Nuestros ojitos se vieron por última vez el 21 de agosto de 2025 a las 20:30</p>
+
+  <button id="playPauseBtn">⏸ Pause</button>
+
+  <div class="video-container" id="videoContainer">
+    <div id="ytPlayer"></div>
+  </div>
 
   <script>
-    const ultimaFecha = new Date(2025, 7, 21); // mes 7 = agosto
+    // contador
+    const ultimaFecha = new Date(2025, 7, 21, 20, 30, 0); // 21 agosto 2025 20:30
     function actualizar() {
-      const hoy = new Date();
-      const inicio = new Date(ultimaFecha.getFullYear(), ultimaFecha.getMonth(), ultimaFecha.getDate());
-      const actual = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
-      const dias = Math.floor((actual - inicio) / 86400000);
-      document.getElementById("contador").textContent = dias + (dias === 1 ? " día sin ti 💔" : " días sin ti 💔");
+      const ahora = new Date();
+      const diferencia = ahora - ultimaFecha;
+      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+      const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
+      const segundos = Math.floor((diferencia / 1000) % 60);
+      document.getElementById("contador").textContent =
+        dias + (dias === 1 ? " día sin ti 💔" : " días sin ti 💔");
+      document.getElementById("contadorExacto").textContent =
+        horas + "h " + minutos + "m " + segundos + "s";
     }
     actualizar();
-    setInterval(actualizar, 1000 * 60 * 60);
+    setInterval(actualizar, 1000);
+
+    // YouTube API
+    let player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('ytPlayer', {
+        height: '0',
+        width: '0',
+        videoId: '2fUL8l9OPfw',
+        playerVars: {
+          autoplay: 1,
+          mute: 1,
+          loop: 1,
+          playlist: '2fUL8l9OPfw'
+        },
+        events: {
+          onReady: onPlayerReady
+        }
+      });
+    }
+
+    function onPlayerReady() {
+      const btn = document.getElementById("playPauseBtn");
+      btn.onclick = () => {
+        if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+          player.pauseVideo();
+          btn.textContent = "▶ Play";
+        } else {
+          player.playVideo();
+          player.unMute();
+          btn.textContent = "⏸ Pause";
+        }
+      };
+    }
   </script>
+  <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
