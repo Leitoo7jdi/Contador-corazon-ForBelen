@@ -1,229 +1,144 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Días que no nos vimos</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  body {
-    margin: 0;
-    background: #111;
-    color: #eee;
-    font-family: "Arial", sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    min-height: 100vh;
-    text-align: center;
-    padding-top: 20px;
-  }
-  h1 {
-    font-size: 1.8rem;
-    color: #ffb6c1;
-    text-shadow: 0 0 10px rgba(255,182,193,0.8);
-    margin-bottom: 20px;
-  }
-  .corazon {
-    position: relative;
-    display: inline-block;
-    width: 200px;
-    height: 200px;
-    background: url('corazon.png') no-repeat center/contain;
-    margin-bottom: 20px;
-  }
-  #contador {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #ff4444;
-    text-shadow: 0 0 12px rgba(255,0,0,0.8);
-  }
-  #contadorExacto {
-    margin-top: 15px;
-    font-size: 1rem;
-    color: #ff6666;
-    text-shadow: 0 0 8px rgba(255,0,0,0.6);
-  }
-  .fecha {
-    margin-top: 25px;
-    font-size: 1rem;
-    color: #aaa;
-    margin-bottom: 20px;
-  }
-  button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background: #ffb6c1;
-    border: none;
-    border-radius: 5px;
-    color: #111;
-    font-size: 1rem;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 0 8px rgba(255,182,193,0.6);
-  }
-  button:hover {
-    background: #ffa6b6;
-  }
-  .video-container {
-    width: 300px;
-    height: 150px;
-    opacity: 0.3;
-    margin-top: 20px;
-    position: relative;
-  }
-  #ytPlayer {
-    width: 100%;
-    height: 100%;
-  }
-  .chat-container {
-    width: 90%;
-    max-width: 400px;
-    background: #1a1a1a;
-    border: 2px solid #ffb6c1;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    color: #ffb6c1;
-  }
-  #messages {
-    flex-grow: 1;
-    height: 150px;
-    overflow-y: auto;
-    margin-bottom: 10px;
-    border: 1px solid #ffb6c1;
-    padding: 5px;
-    border-radius: 5px;
-  }
-  #messageInput {
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ffb6c1;
-    background: #111;
-    color: #ffb6c1;
-    flex-grow: 1;
-    margin-right: 5px;
-  }
-  .send-container {
-    display: flex;
-  }
-</style>
-</head>
-<body>
-<h1>For Lucia Belen Soria</h1>
+<html idioma="es">
+<cabeza>
+  <meta juego de caracteres="UTF-8">
+  <título>Días que no nos vemos</título>
+  <meta nombre="ventana gráfica"contenido="ancho=ancho del dispositivo, escala inicial=1">
+  <estilo>
+    cuerpo{
+      margen: 0;
+      fondo: #111;
+      color: #eee;
+      familia de fuentes: "Arial",sin serifa;
+      mostrar:doblar;
+      dirección flexible:columna;
+      justificar-contenido:centro;
+      elementos de alineación:centro;
+      altura mínima: 100vh;
+      alineación de texto:centro;
+    }
+    h1{
+      tamaño de fuente: 1.8movimiento rápido del ojo;
+      color: #ffb6c1;
+      sombra de texto: 0 0 10píxeles RGBA(255,182,193,0.8);
+      margen inferior: 20píxeles;
+    }
+    .corazón{
+      posición:relativo;
+      mostrar:bloque en línea;
+      ancho: 200píxeles;
+      altura: 200píxeles;
+      fondo: URL('corazón.png') centro/contenedor sin repetición;
+      margen inferior: 20píxeles;
+    }
+    #contador{
+      posición:absoluto;
+      arriba: 50%;
+      izquierda: 50%;
+      transformar: traducir(-50%, -50%);
+      tamaño de fuente: 1.8movimiento rápido del ojo;
+      peso de fuente:atrevido;
+      color: #ff4444;
+      sombra de texto: 0 0 12píxeles RGBA(255,0,0,0.8);
+    }
+    #contadorExacto{
+      margen superior: 15píxeles;
+      tamaño de fuente: 1movimiento rápido del ojo;
+      color: #ff6666;
+      sombra de texto: 0 0 8píxeles RGBA(255,0,0,0.6);
+    }
+    .fecha{
+      margen superior: 25píxeles;
+      tamaño de fuente: 1movimiento rápido del ojo;
+      color: #aaa;
+      margen inferior: 20píxeles;
+    }
+    botón{
+      margen superior: 20píxeles;
+      relleno: 10píxeles 20píxeles;
+      fondo: #ffb6c1;
+      borde:ninguno;
+      radio del borde: 5píxeles;
+      color: #111;
+      tamaño de fuente: 1movimiento rápido del ojo;
+      cursor:puntero;
+      peso de fuente:atrevido;
+      sombra de caja: 0 0 8píxeles RGBA(255,182,193,0.6);
+    }
+    botón:flotar{
+      fondo: #ffa6b6;
+    }
+    .contenedor de vídeo{
+      ancho: 320píxeles;      /* ancho discreto */
+      altura: 180píxeles;     /* altura proporcional 16:9 */
+      opacidad: 0.2;      /* muy útil */
+      margen superior: 20píxeles;
+    }
+  </estilo>
+</cabeza>
+<cuerpo>
+  <h1>Para Lucía Belén Soria</h1>
 
-<div class="corazon">
-  <div id="contador">—</div>
-</div>
-<div id="contadorExacto">—</div>
-<p class="fecha">Nuestros ojitos se vieron por ultima vez el 21 de agosto de 2025 a las 20:30</p>
+  <división clase="corazón">
+    <división identificación="contador">—</división>
+  </división>
+  <división identificación="contadorExacto">—</división>
+  <pag clase="fecha">Nuestros ojitos se vieron por última vez el 21 de agosto de 2025 a las 20:30</pag>
 
-<button id="playPauseBtn">▶ Play</button>
+  <botón identificación="botón de reproducción/pausa">▶ Jugar</botón>
 
-<div class="video-container" id="videoContainer">
-  <div id="ytPlayer"></div>
-</div>
+  <división clase="contenedor de vídeo">
+    <división identificación="Reproductor de YouTube"></división>
+  </división>
 
-<!-- Chat -->
-<div class="chat-container">
-  <div id="messages"></div>
-  <div class="send-container">
-    <input type="text" id="messageInput" placeholder="Escribí un mensaje...">
-    <button id="sendBtn">Enviar</button>
-  </div>
-</div>
+  <guion>
+    // contador
+    constante ÚltimaFecha = nuevo Fecha(2025, 7, 21, 20, 30, 0);
+    función actualizar() {
+      constante ahora = nuevo Fecha();
+      constante diferencia = ahora - ÚltimaFecha;
+      constante días = Matemáticas.piso(diferencia / (1000 * 60 * 60 * 24));
+      constante horas = Matemáticas.piso((diferencia / (1000 * 60 * 60)) % 24);
+      constante minutos = Matemáticas.piso((diferencia / (1000 * 60)) % 60);
+      constante segundos = Matemáticas.piso((diferencia / 1000) % 60);
+      documento.obtenerElementoPorId("contador").Contenido del texto =
+        días + (días === 1?"Día sin ti 💔":"Días sin ti 💔");
+      documento.obtenerElementoPorId("contadorExacto").Contenido del texto =
+        horas + "h " + minutos + "m" + segundos + "s";
+    }
+    actualizar();
+    establecerIntervalo(actualizar, 1000);
 
-<script>
-  // Contador
-  const ultimaFecha = new Date(2025, 7, 21, 20, 30, 0);
-  function actualizar() {
-    const ahora = new Date();
-    const diferencia = ahora - ultimaFecha;
-    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-    const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
-    const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
-    const segundos = Math.floor((diferencia / 1000) % 60);
-    document.getElementById("contador").textContent =
-      dias + (dias === 1 ? " día sin ti 💔" : " días sin ti 💔");
-    document.getElementById("contadorExacto").textContent =
-      horas + "h " + minutos + "m " + segundos + "s";
-  }
-  actualizar();
-  setInterval(actualizar, 1000);
-
-  // YouTube
-  let player;
-  function onYouTubeIframeAPIReady() {
-    player = new YT.Player('ytPlayer', {
-      height: '150',
-      width: '300',
-      videoId: '2fUL8l9OPfw',
-      playerVars: { autoplay: 0, loop: 1, playlist: '2fUL8l9OPfw' },
-      events: { onReady: onPlayerReady }
-    });
-  }
-  function onPlayerReady() {
-    const btn = document.getElementById("playPauseBtn");
-    btn.onclick = () => {
-      if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-        player.pauseVideo();
-        btn.textContent = "▶ Play";
-      } else {
-        player.playVideo();
-        btn.textContent = "⏸ Pause";
-      }
-    };
-  }
-</script>
-<script src="https://www.youtube.com/iframe_api"></script>
-
-<!-- Firebase SDK y chat -->
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
-<script>
-  // Pedir nombre al entrar
-  let nombre = prompt("Ingresa tu nombre");
-  if(!nombre) nombre = "Anonimo";
-
-  // Configuración de Firebase
-  const firebaseConfig = {
-    apiKey: "AIzaSyD41hsUP9N5yA2gY5O4qxKQakalKSd1JHE",
-    authDomain: "belenchat-859ee.firebaseapp.com",
-    databaseURL: "https://belenchat-859ee-default-rtdb.firebaseio.com",
-    projectId: "belenchat-859ee",
-    storageBucket: "belenchat-859ee.firebasestorage.app",
-    messagingSenderId: "648388298829",
-    appId: "1:648388298829:web:817dd86dbb4355e5bd3404",
-    measurementId: "G-1CNG304R8T"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const database = firebase.database();
-
-  const messagesDiv = document.getElementById("messages");
-  const input = document.getElementById("messageInput");
-  const sendBtn = document.getElementById("sendBtn");
-
-  const messagesRef = database.ref("chat");
-  messagesRef.on("child_added", snapshot => {
-    const msg = snapshot.val();
-    const p = document.createElement("p");
-    p.textContent = msg.name + ": " + msg.text;
-    messagesDiv.appendChild(p);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-  });
-
-  sendBtn.onclick = () => {
-    const text = input.value.trim();
-    if(text === "") return;
-    messagesRef.push({ name: nombre, text });
-    input.value = "";
-  };
-</script>
-</body>
+    // API de YouTube
+    dejar jugador;
+    función en YouTube Iframe API Ready() {
+      jugador = nuevo YouTube.Jugador('ytPlayer', {
+        altura:'180',   // visible pero discreto
+        ancho:'320',
+        ID de video:'2fUL8l9OPfw',
+        variables de jugador:{
+          reproducción automática:0,   // sin reproducción automática
+          bucle:1,
+          lista de reproducción:'2fUL8l9OPfw'
+        },
+        eventos:{
+          Listo:() => {
+            constante botón = documento.obtenerElementoPorId(Botón de reproducción y pausa);
+            botón.al hacer clic = () => {
+              constante estado = jugador.obtenerEstadoDelJugador();
+              si (estado === YouTube.Estado del jugador.JUGANDO) {
+                jugador.pausaVideo();
+                botón.Contenido del texto = "▶ Jugar";
+              } demás {
+                jugador.reproducirVideo();
+                botón.Contenido del texto = "⏸ Pausa";
+              }
+            };
+          }
+        }
+      });
+    }
+  </guion>
+  <guion origen="https://www.youtube.com/iframe_api"></guion>
+</cuerpo>
 </html>
