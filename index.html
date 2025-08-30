@@ -19,7 +19,7 @@
     }
     h1 {
       font-size: 1.8rem;
-      color: #ffb6c1; /* rosa pastel suave */
+      color: #ffb6c1;
       text-shadow: 0 0 10px rgba(255,182,193,0.8);
       margin-bottom: 20px;
     }
@@ -84,15 +84,15 @@
   <div id="contadorExacto">—</div>
   <p class="fecha">Nuestros ojitos se vieron por última vez el 21 de agosto de 2025 a las 20:30</p>
 
-  <button id="playPauseBtn">⏸ Pause</button>
+  <button id="playPauseBtn">▶ Play</button>
 
-  <div class="video-container" id="videoContainer">
+  <div class="video-container">
     <div id="ytPlayer"></div>
   </div>
 
   <script>
     // contador
-    const ultimaFecha = new Date(2025, 7, 21, 20, 30, 0); // 21 agosto 2025 20:30
+    const ultimaFecha = new Date(2025, 7, 21, 20, 30, 0);
     function actualizar() {
       const ahora = new Date();
       const diferencia = ahora - ultimaFecha;
@@ -116,8 +116,8 @@
         width: '0',
         videoId: '2fUL8l9OPfw',
         playerVars: {
-          autoplay: 1,
-          mute: 1,
+          autoplay: 0,  // NO autoplay
+          mute: 0,      // NO mute
           loop: 1,
           playlist: '2fUL8l9OPfw'
         },
@@ -135,7 +135,6 @@
           btn.textContent = "▶ Play";
         } else {
           player.playVideo();
-          player.unMute();
           btn.textContent = "⏸ Pause";
         }
       };
