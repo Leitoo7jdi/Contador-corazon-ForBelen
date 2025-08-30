@@ -69,9 +69,10 @@
       background: #ffa6b6;
     }
     .video-container {
-      width: 0;
-      height: 0;
-      overflow: hidden;
+      width: 320px;      /* ancho discreto */
+      height: 180px;     /* altura proporcional 16:9 */
+      opacity: 0.2;      /* muy sutil */
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -112,32 +113,30 @@
     let player;
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('ytPlayer', {
-        height: '0',
-        width: '0',
+        height: '180',   // visible pero discreto
+        width: '320',
         videoId: '2fUL8l9OPfw',
         playerVars: {
-          autoplay: 0,  // NO autoplay
-          mute: 0,      // NO mute
+          autoplay: 0,   // no autoplay
           loop: 1,
           playlist: '2fUL8l9OPfw'
         },
         events: {
-          onReady: onPlayerReady
+          onReady: () => {
+            const btn = document.getElementById("playPauseBtn");
+            btn.onclick = () => {
+              const state = player.getPlayerState();
+              if (state === YT.PlayerState.PLAYING) {
+                player.pauseVideo();
+                btn.textContent = "▶ Play";
+              } else {
+                player.playVideo();
+                btn.textContent = "⏸ Pause";
+              }
+            };
+          }
         }
       });
-    }
-
-    function onPlayerReady() {
-      const btn = document.getElementById("playPauseBtn");
-      btn.onclick = () => {
-        if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-          player.pauseVideo();
-          btn.textContent = "▶ Play";
-        } else {
-          player.playVideo();
-          btn.textContent = "⏸ Pause";
-        }
-      };
     }
   </script>
   <script src="https://www.youtube.com/iframe_api"></script>
