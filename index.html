@@ -7,7 +7,8 @@
 <style>
   body {
     margin: 0;
-    background: #111;
+    background: url('https://i.imgur.com/vOeld4C.png') no-repeat center center scroll;
+    background-size: cover;
     color: #eee;
     font-family: "Arial", sans-serif;
     display: flex;
@@ -16,13 +17,13 @@
     align-items: center;
     min-height: 100vh;
     text-align: center;
-    padding-top: 20px;
+    padding-top: 40px;
   }
   h1 {
     font-size: 1.8rem;
     color: #ffb6c1;
     text-shadow: 0 0 10px rgba(255,182,193,0.8);
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   .corazon {
     position: relative;
@@ -30,7 +31,7 @@
     width: 200px;
     height: 200px;
     background: url('corazon.png') no-repeat center/contain;
-    margin-bottom: 20px;
+    margin: 15px 0;
   }
   #contador {
     position: absolute;
@@ -43,43 +44,45 @@
     text-shadow: 0 0 12px rgba(255,0,0,0.8);
   }
   #contadorExacto {
-    margin-top: 15px;
+    margin-top: 5px;
     font-size: 1rem;
     color: #ff6666;
     text-shadow: 0 0 8px rgba(255,0,0,0.6);
   }
   .fecha {
-    margin-top: 25px;
+    margin-top: 15px;
     font-size: 1rem;
-    color: #aaa;
+    color: #ffb6c1;
+    text-shadow: 0 0 10px rgba(255,182,193,0.8);
     margin-bottom: 20px;
   }
-  button {
-    margin-top: 10px;
+
+  /* Botón Play/Pause arriba del video */
+  #playPauseBtn {
+    display: block;
+    margin: 10px auto;
     padding: 10px 20px;
     background: #ffb6c1;
+    color: #111;
     border: none;
     border-radius: 5px;
-    color: #111;
+    font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
-    font-weight: bold;
     box-shadow: 0 0 8px rgba(255,182,193,0.6);
   }
-  button:hover {
+  #playPauseBtn:hover {
     background: #ffa6b6;
   }
+
   .video-container {
     width: 300px;
     height: 150px;
     opacity: 0.3;
-    margin-top: 20px;
+    margin-top: 0;
     position: relative;
   }
-  #ytPlayer {
-    width: 100%;
-    height: 100%;
-  }
+  #ytPlayer { width: 100%; height: 100%; }
 </style>
 </head>
 <body>
@@ -91,6 +94,7 @@
 <div id="contadorExacto">—</div>
 <p class="fecha">Nuestros ojitos se vieron por última vez el 21 de agosto de 2025 a las 20:30</p>
 
+<!-- Botón Play/Pause arriba del video -->
 <button id="playPauseBtn">▶ Play</button>
 
 <div class="video-container" id="videoContainer">
@@ -115,17 +119,18 @@
   actualizar();
   setInterval(actualizar, 1000);
 
-  // YouTube
+  // YouTube con API
   let player;
   function onYouTubeIframeAPIReady() {
     player = new YT.Player('ytPlayer', {
       height: '150',
       width: '300',
-      videoId: '2fUL8l9OPfw',
-      playerVars: { autoplay: 0, loop: 1, playlist: '2fUL8l9OPfw' },
+      videoId: 'I136ciBT1VM', // <-- Nuevo video
+      playerVars: { autoplay: 0, loop: 1, playlist: 'I136ciBT1VM' },
       events: { onReady: onPlayerReady }
     });
   }
+
   function onPlayerReady() {
     const btn = document.getElementById("playPauseBtn");
     btn.onclick = () => {
@@ -138,6 +143,15 @@
       }
     };
   }
+
+  // Fallback automático a <iframe> si la API no carga
+  setTimeout(() => {
+    const container = document.getElementById('ytPlayer');
+    if (!window.YT || !window.YT.Player || container.children.length === 0) {
+      container.innerHTML =
+        '<iframe width="300" height="150" src="https://www.youtube.com/embed/I136ciBT1VM?autoplay=0&loop=1&playlist=I136ciBT1VM&controls=1&modestbranding=1" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+    }
+  }, 2500);
 </script>
 <script src="https://www.youtube.com/iframe_api"></script>
 </body>
