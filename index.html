@@ -49,10 +49,12 @@
     color: #ff6666;
     text-shadow: 0 0 8px rgba(255,0,0,0.6);
   }
+
+  /* Texto rosa un poquito más oscuro para que se vea */
   .fecha {
     margin-top: 15px;
     font-size: 1rem;
-    color: #ffb6c1;
+    color: #ff7f9a; /* rosa pastel más oscuro */
     text-shadow: 0 0 10px rgba(255,182,193,0.8);
     margin-bottom: 20px;
   }
@@ -75,10 +77,11 @@
     background: #ffa6b6;
   }
 
+  /* Video casi invisible */
   .video-container {
     width: 300px;
     height: 150px;
-    opacity: 0.3;
+    opacity: 0.1; /* casi invisible */
     margin-top: 0;
     position: relative;
   }
@@ -125,7 +128,7 @@
     player = new YT.Player('ytPlayer', {
       height: '150',
       width: '300',
-      videoId: 'I136ciBT1VM', // <-- Nuevo video
+      videoId: 'I136ciBT1VM',
       playerVars: { autoplay: 0, loop: 1, playlist: 'I136ciBT1VM' },
       events: { onReady: onPlayerReady }
     });
@@ -144,7 +147,7 @@
     };
   }
 
-  // Fallback automático a <iframe> si la API no carga
+  // Fallback iframe para móviles/Android
   setTimeout(() => {
     const container = document.getElementById('ytPlayer');
     if (!window.YT || !window.YT.Player || container.children.length === 0) {
